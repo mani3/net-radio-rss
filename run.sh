@@ -15,6 +15,6 @@ python manage.py db migrate -m "`date '+%Y%m%d%H%M'`"
 python manage.py db show
 python manage.py db upgrade
 
-gunicorn app:app -c gunicorn_config.py
+gunicorn app:app -c `pwd`/gunicorn_config.py
 deactivate
 
