@@ -25,6 +25,6 @@ APP=app:app
 if [ -f $PID ]; then rm $PID; fi
 
 cd $ROOT
-exec $GUNICORN -c $ROOT/gunicorn_conf.py --pid=$PID $APP &
+exec $GUNICORN -c $ROOT/gunicorn_conf.py --pid=$PID --preload $APP &
 
 deactivate
