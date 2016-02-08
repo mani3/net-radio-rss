@@ -6,6 +6,8 @@ if [ ! -d "${ENV_DIR}" ]; then
   ./env.sh ${ENV_DIR}
 fi
 
+source ${ENV_DIR}/bin/activate
+
 # Run migration
 if [ ! -d "migrations" ]; then
   python manage.py db init
@@ -24,3 +26,5 @@ if [ -f $PID ]; then rm $PID; fi
 
 cd $ROOT
 exec $GUNICORN -c $ROOT/gunicorn_conf.py --pid=$PID $APP &
+
+deactivate
