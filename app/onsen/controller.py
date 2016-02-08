@@ -62,7 +62,7 @@ def update():
 
 @mod_onsen.route('/xml', methods=['GET'])
 def xml():
-    items = Item.query.join(Channel, Channel.id == Item.channel_id).add_columns(Item.update, Item.number, Item.file_url, Channel.title, Channel.name, Channel.personality, Channel.text, Channel.copyright, Channel.image_url).all()
+    items = Item.query.join(Channel, Channel.id == Item.channel_id).add_columns(Item.update, Item.number, Item.file_url, Channel.title, Channel.name, Channel.personality, Channel.text, Channel.copyright, Channel.image_url).order_by(Item.created_at.desc()).all()
     fg = FeedGenerator()
     fg.load_extension('podcast')
     fg.link(href='http://www.onsen.ag/', rel='alternate')
