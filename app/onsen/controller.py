@@ -4,6 +4,7 @@
 import urllib
 import urllib2
 import hashlib
+import pytz
 
 from lxml import etree
 from datetime import datetime
@@ -74,6 +75,9 @@ def xml():
         fe.title(u'[{0}][{1}]{2}'.format(item.update.strftime('%Y/%m/%d'), item.number, item.title))
         fe.description(item.text)
         fe.enclosure(item.file_url, 0, 'audio/mpeg')
+        tz = pytz.timezone('Asia/Tokyo')
+        d = item.update.replace(tzinfo=tz)
+        fe.pubdate(d.isoformat())
     xml = fg.rss_str(pretty=True)
     return Response(xml, mimetype='text/xml')
 
